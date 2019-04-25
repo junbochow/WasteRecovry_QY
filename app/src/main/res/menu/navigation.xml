@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/home"
+        android:title="@string/title_home" />
+    <item
+        android:id="@+id/navigation_order"
+        android:icon="@mipmap/norder"
+        android:title="订单" />
+
+    <item
+        android:id="@+id/navigation_scan"
+        android:icon="@mipmap/nscan"
+        android:title="扫一扫" />
+
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@mipmap/shop"
+        android:title="@string/title_dashboard" />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@mipmap/mine"
+        android:title="@string/title_notifications" />
+
+</menu>

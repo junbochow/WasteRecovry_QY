@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFAFA"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:background="#F5F5F5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/home_pic"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@mipmap/home_pic1" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingRight="60dp"
+        android:paddingLeft="60dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/order"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/book" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order"
+            android:layout_centerHorizontal="true"
+            android:text="预约上门"/>
+
+        <Button
+            android:id="@+id/info"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/info"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/order"
+            android:text="回收分类"/>
+        <Button
+            android:id="@+id/diction"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/diction"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/diction"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="使用指南"/>
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <!--<android.support.v7.widget.CardView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="8dp"-->
+        <!--app:cardCornerRadius="10dp">-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="20dp"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:paddingRight="20dp">-->
+        <!--<TextView-->
+            <!--android:id="@+id/mscore"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="积分管理"-->
+            <!--android:drawableLeft="@mipmap/score"/>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/line1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="10dp"-->
+            <!--android:layout_below="@id/mscore"-->
+            <!--android:background="@mipmap/line"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/score11"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/line1"-->
+            <!--android:text="您当前拥有积分："-->
+            <!--android:paddingLeft="20dp"/>-->
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/scorenow"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/score11"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:paddingLeft="30dp"-->
+            <!--android:text="286.5"-->
+            <!--android:textSize="30dp"/>-->
+
+        <!--<TextView-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBaseline="@+id/scorenow"-->
+            <!--android:layout_toEndOf="@+id/scorenow"-->
+            <!--android:text="分"-->
+            <!--android:layout_toRightOf="@+id/scorenow" />-->
+
+    <!--</RelativeLayout>-->
+    <!--</android.support.v7.widget.CardView>-->
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
+        <TextView
+            android:paddingTop="7dp"
+            android:id="@+id/nearbin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="附近回收箱"
+            android:drawableLeft="@mipmap/nearbin"/>
+            <ImageView
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@mipmap/line"/>
+        <Button
+            android:id="@+id/show_map"
+            android:layout_below="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:background="@mipmap/map111"
+            />
+            <ImageView
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@mipmap/line"/>
+            <RelativeLayout
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/bin_name"
+                    android:text="浙江工业大学01号回收箱"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/distance"
+                    android:text="约3.06km"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
+                    android:layout_alignParentRight="true"/>
+                <TextView
+                    android:paddingTop="5dp"
+                    android:id="@+id/bin_address"
+                    android:text="浙江省杭州市西湖区留和路288号计算机楼旁"
+                    android:textSize="11dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bin_name" />
+                <RelativeLayout
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bin_address">
+                    <TextView
+                        android:id="@+id/bin_info"
+                        android:text="所有回收箱已满"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/lined"
+                        android:layout_gravity="center_horizontal"
+                        />
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="15dp"
+                        android:id="@+id/bin_time"
+                        android:text="00:00~23:59"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@mipmap/recovery"
+        android:layout_gravity="center"/>
+    <TextView
+        android:paddingBottom="90dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="货郎鼓，您的废品回收专家"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
+</ScrollView>
