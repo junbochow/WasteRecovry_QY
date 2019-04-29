@@ -16,79 +16,56 @@
         android:layout_margin="8dp"
         app:cardCornerRadius="10dp">
 
-       <LinearLayout
-           android:paddingTop="10dp"
-           android:paddingLeft="10dp"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <TextView
-                   android:id="@+id/name"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="联系人" />
-               <EditText
-                   android:layout_toRightOf="@+id/name"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:hint="   请填写联系人姓名"
-                   android:textSize="10dp"/>
-           </RelativeLayout>
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <TextView
-                   android:id="@+id/phone"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="电     话" />
-               <EditText
-                   android:layout_toRightOf="@+id/phone"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:hint="   请填写联系方式"
-                   android:textSize="10dp"/>
-           </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:text="陈嘉彬"
+                android:textSize="20dp"
+                android:id="@+id/default_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_toRightOf="@id/default_name"
+                android:paddingLeft="30dp"
+                android:text="15958040289"
+                android:id="@+id/default_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@mipmap/line"/>
 
-            <RelativeLayout
+        <TextView
+            android:id="@+id/default_city"
+            android:text="浙江-杭州-西湖"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/default_address"
+                android:text="留和路288号浙江工业大学"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/address_choose"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="地     址" />
-                <EditText
-                    android:layout_toRightOf="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="   小区/写字楼/学校等"
-                    android:textSize="10dp"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="门牌号" />
-                <EditText
-                    android:layout_toRightOf="@+id/detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="   详细地址"
-                    android:textSize="10dp"/>
-            </RelativeLayout>
-           <Button
-               android:layout_width="match_parent"
-               android:layout_height="35dp"
-               android:layout_gravity="center"
-               android:text="地址选择"
-               />
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:text="地址选择"
+                />
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
@@ -110,20 +87,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/time"
+                    android:id="@+id/time1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="预约时间" />
-                <EditText
-                    android:layout_toRightOf="@+id/time"
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_toRightOf="@+id/time1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="   选择预约上门时间"
-                    android:textSize="10dp"/>
+                    android:hint="   请选择预约上门时间" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/aimright"/>
             </RelativeLayout>
-            <RelativeLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
                 <TextView
                     android:id="@+id/info"
                     android:layout_width="wrap_content"
@@ -134,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="10dp"/>
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -166,9 +154,11 @@
                     android:layout_below="@+id/items"
                     android:background="@mipmap/line" />
             </RelativeLayout>
-            <TextView
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_items"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="35dp"

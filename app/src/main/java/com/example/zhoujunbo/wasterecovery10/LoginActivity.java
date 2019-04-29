@@ -61,6 +61,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.login_btn:
                 //将收到的验证码和手机号提交再次核对
+                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
                 dopost(edt_account);
                 SMSSDK.submitVerificationCode("86", edt_account, edt_password);
                 break;
@@ -112,9 +115,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(getApplicationContext(), "提交验证码成功",
                                 Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("userName",account.getText().toString().trim());
-                        intent.putExtras(bundle);
                         startActivity(intent);
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
                         Toast.makeText(getApplicationContext(), "正在获取验证码",

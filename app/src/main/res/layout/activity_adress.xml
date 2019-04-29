@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdressActivity">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/address_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/add_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系人" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="   请填写联系人姓名"
+                    android:textSize="11dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/add_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电     话" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="   请填写联系方式"
+                    android:textSize="11dp"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/city1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地     址" />
+
+                <TextView
+                    android:id="@+id/add_city"
+                    android:layout_toRightOf="@+id/city1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="     选择省、市、区"
+                    android:layout_centerVertical="true"
+                    android:textSize="11dp"/>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/aimright"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="门牌号" />
+                <EditText
+                    android:id="@+id/add_postnum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="   详细地址"
+                    android:textSize="11dp"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/add_address"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:text="新增地址"
+                />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!--<Button-->
+        <!--android:id="@+id/city_choose"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="浙江-温州-乐清"/>-->
+
+</LinearLayout>

@@ -65,7 +65,7 @@ public class Mine_Fragment extends Fragment {
             mine_items.add(address);
             Mine order=new Mine("历史订单",R.drawable.mine_order);
             mine_items.add(order);
-            Mine coins=new Mine("积分管理",R.drawable.mine_coins);
+            Mine coins=new Mine("收入统计",R.drawable.mine_coins);
             mine_items.add(coins);
 
     }
