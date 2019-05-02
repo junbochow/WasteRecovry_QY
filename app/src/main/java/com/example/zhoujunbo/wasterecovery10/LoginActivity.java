@@ -20,7 +20,7 @@ import cn.smssdk.SMSSDK;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText account, password;
-    private Button login_btn, identify_btn;
+    private Button login_btn, register_btn;
     int i = 30;
 
     @Override
@@ -31,25 +31,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void init() {
-        MobSDK.init(this);
         account = (EditText) findViewById(R.id.account);
         password = (EditText) findViewById(R.id.password);
         login_btn = (Button) findViewById(R.id.login_btn);
-        identify_btn = (Button) findViewById(R.id.identify_btn);
+        register_btn = (Button) findViewById(R.id.register_btn);
         login_btn.setOnClickListener(this);
-        identify_btn.setOnClickListener(this);
-        EventHandler eventHandler = new EventHandler() {
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                handler.sendMessage(msg);
-            }
-        };
-        //注册回调监听接口
-        SMSSDK.registerEventHandler(eventHandler);
+        register_btn.setOnClickListener(this);
+
 
     }
 
@@ -57,76 +45,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         String edt_account = account.getText().toString();
         String edt_password = password.getText().toString();
-
         switch (v.getId()) {
             case R.id.login_btn:
-                //将收到的验证码和手机号提交再次核对
-                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-
-                dopost(edt_account);
-                SMSSDK.submitVerificationCode("86", edt_account, edt_password);
-                break;
-            case R.id.identify_btn:
                 // 1. 判断手机号是不是11位并且看格式是否合理
-                if (!judgePhoneNums(edt_account)) {
-                    return;
-                } // 2. 通过sdk发送短信验证
-                SMSSDK.getVerificationCode("86", edt_account);
-                // 3. 把按钮变成不可点击，并且显示倒计时（正在获取）
-                identify_btn.setClickable(false);
-                identify_btn.setText("重新发送(" + i + ")");
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        for (; i > 0; i--) {
-                            handler.sendEmptyMessage(-9);
-                            if (i <= 0) {
-                                break;
-                            }
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        handler.sendEmptyMessage(-8);
-                    }
-                }).start();
+//                if (!judgePhoneNums(edt_account)) {
+//                    return;
+//                }
+                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent_login);
+//                dopost(edt_account,edt_password);
                 break;
+            case R.id.register_btn:
+
+                Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
         }
     }
-    Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            if (msg.what == -9) {
-                identify_btn.setText("重新发送(" + i + ")");
-            } else if (msg.what == -8) {
-                identify_btn.setText("获取验证码");
-                identify_btn.setClickable(true);
-                i = 30;
-            } else {
-                int event = msg.arg1;
-                int result = msg.arg2;
-                Object data = msg.obj;
-                Log.e("event", "event=" + event);
-                if (result == SMSSDK.RESULT_COMPLETE) {
-                    // 短信注册成功后，返回MainActivity,然后提示
-                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {// 提交验证码成功
-                        Toast.makeText(getApplicationContext(), "提交验证码成功",
-                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        Toast.makeText(getApplicationContext(), "正在获取验证码",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(LoginActivity.this,"验证码不正确",Toast.LENGTH_SHORT).show();
-                        ((Throwable) data).printStackTrace();
-                    }
-                }
-            }
-        }
-    };
+
     /**
      * 判断手机号码是否合理
      *
@@ -141,12 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return false;
     }
 
-    /**
-     * 判断一个字符串的位数
-     * @param str
-     * @param length
-     * @return
-     */
+    /* 判断一个字符串的位数*/
     public static boolean isMatchLength(String str, int length) {
         if (str.isEmpty()) {
             return false;
@@ -155,9 +85,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /**
-     * 验证手机格式
-     */
+    /* 验证手机格式*/
     public static boolean isMobileNO(String mobileNums) {
         /*
          * 移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
@@ -178,12 +106,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onDestroy();
     }
 
-        private void dopost (final String account){ //发送后台
+        private void dopost (final String account,final String password){ //发送后台
             new Thread(new Runnable() {
 
                 @Override
                 public void run() {
-                    final String state = NetUilts.loginofPost(account);
+                    final String state = NetUilts.loginofPost(account,password);
                     runOnUiThread(new Runnable() {//执行任务在主线程中
                         @Override
                         public void run() {//就是在主线程中操作

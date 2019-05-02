@@ -34,9 +34,10 @@
                     android:layout_height="wrap_content"
                     android:text="联系人" />
                 <EditText
+                    android:paddingLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="   请填写联系人姓名"
+                    android:hint="请填写联系人姓名"
                     android:textSize="11dp"/>
             </LinearLayout>
             <LinearLayout
@@ -49,9 +50,10 @@
                     android:layout_height="wrap_content"
                     android:text="电     话" />
                 <EditText
+                    android:paddingLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="   请填写联系方式"
+                    android:hint="请填写联系方式"
                     android:textSize="11dp"/>
             </LinearLayout>
 
@@ -65,11 +67,14 @@
                     android:text="地     址" />
 
                 <TextView
+                    android:layout_margin="5dp"
                     android:id="@+id/add_city"
+                    android:clickable="true"
+                    android:paddingLeft="20dp"
                     android:layout_toRightOf="@+id/city1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="     选择省、市、区"
+                    android:text="选择省-市-区"
                     android:layout_centerVertical="true"
                     android:textSize="11dp"/>
 
@@ -90,9 +95,10 @@
                     android:text="门牌号" />
                 <EditText
                     android:id="@+id/add_postnum"
+                    android:paddingLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="   详细地址"
+                    android:hint="详细地址"
                     android:textSize="11dp"/>
             </LinearLayout>
             <Button

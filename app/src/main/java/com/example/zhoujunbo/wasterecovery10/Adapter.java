@@ -13,18 +13,15 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private List<Mine> mine_items;
-
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView itemImage;
         TextView itemName;
-
         public ViewHolder(@NonNull View view) {
             super(view);
             itemImage=(ImageView)view.findViewById(R.id.icon_mine);
             itemName=(TextView) view.findViewById(R.id.name_mine);
         }
     }
-
     public Adapter(List<Mine> list_items){
          mine_items=list_items;
     }

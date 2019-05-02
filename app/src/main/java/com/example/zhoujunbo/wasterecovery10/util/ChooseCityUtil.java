@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -19,6 +22,8 @@ import com.google.gson.Gson;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.mob.MobSDK.getContext;
 
 /**
  *
@@ -43,18 +48,30 @@ public class ChooseCityUtil implements View.OnClickListener, NumberPicker.OnValu
         newCityArray[1] = oldCityArray[1];
         newCityArray[2] = oldCityArray[2];
 
-        dialog = new AlertDialog.Builder(context).create();
+        LinearLayout linearLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.dialog_choose_city, null);
+        dialog = new AlertDialog.Builder(context).setView(linearLayout).create();
+//        dialog = new AlertDialog.Builder(context).create();
         dialog.show();
-        Window window = dialog.getWindow();
-        window.setContentView(R.layout.dialog_choose_city);
+//        Window window = dialog.getWindow();
+//        window.setContentView(R.layout.dialog_choose_city);
+
         //初始化控件
-        tvCancel = (TextView) window.findViewById(R.id.tvCancel);
-        tvSure = (TextView) window.findViewById(R.id.tvSure);
+        tvCancel = (TextView) linearLayout.findViewById(R.id.tvCancel);
+        tvSure = (TextView) linearLayout.findViewById(R.id.tvSure);
         tvCancel.setOnClickListener(this);
         tvSure.setOnClickListener(this);
-        npProvince = (NumberPicker) window.findViewById(R.id.npProvince);
-        npCity = (NumberPicker) window.findViewById(R.id.npCity);
-        npCounty = (NumberPicker) window.findViewById(R.id.npCounty);
+        npProvince = (NumberPicker) linearLayout.findViewById(R.id.npProvince);
+        npCity = (NumberPicker) linearLayout.findViewById(R.id.npCity);
+        npCounty = (NumberPicker) linearLayout.findViewById(R.id.npCounty);
+        //设置不能编辑
+        npProvince.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+        npCity.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+        npCounty.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
+        //设置不可滚动
+        npProvince.setWrapSelectorWheel(false);
+        npCity.setWrapSelectorWheel(false);
+        npCounty.setWrapSelectorWheel(false);
+
         setNomal();
         //省：设置选择器最小值、最大值、初始值
         String[] provinceArray = new String[bean.getData().size()];//初始化省数组

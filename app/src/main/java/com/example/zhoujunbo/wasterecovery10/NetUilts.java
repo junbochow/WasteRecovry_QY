@@ -17,14 +17,15 @@ public class NetUilts {
      * @param username
      * @return 登录状态
      * */
-    public static String loginofPost(String username) {
+    public static String loginofPost(String username,String password) {
         HttpURLConnection conn = null;
         try {
             URL url = new URL("http://192.168.43.51/system/userBox/test");
 
             JSONObject jsonParam = new JSONObject();
             try {
-                jsonParam.put("loginName", username);
+                jsonParam.put("username", username);
+                jsonParam.put("password", password);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

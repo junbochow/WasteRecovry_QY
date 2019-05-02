@@ -56,12 +56,16 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
         <service android:name="com.amap.api.location.APSService" />
-        <activity android:name=".AdressActivity"></activity>
+
+        <activity android:name=".AdressActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

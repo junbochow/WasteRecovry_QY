@@ -29,7 +29,7 @@ public class AdressActivity extends AppCompatActivity {
     public void chooseCityDialog() {
         final ChooseCityUtil cityUtil = new ChooseCityUtil();
         String[] oldCityArray = add_city.getText().toString().split("-");
-        if(oldCityArray[0]=="     选择省、市、区"){
+        if(oldCityArray[1]=="市"){
             oldCityArray[0]="浙江";
             oldCityArray[1]="杭州";
             oldCityArray[2]="西湖";
@@ -41,4 +41,5 @@ public class AdressActivity extends AppCompatActivity {
             }
         });
     }
+
 }
