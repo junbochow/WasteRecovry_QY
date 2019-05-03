@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,7 +18,6 @@ import com.example.zhoujunbo.wasterecovery10.R;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 
-import static android.app.PendingIntent.getActivity;
 import static com.mob.MobSDK.getContext;
 
 
@@ -40,6 +38,7 @@ public class ChooseDateUtil implements View.OnClickListener, NumberPicker.OnValu
     public void createDialog(Context context, int[] oldDateArray, ChooseDateInterface dateInterface) {
         this.context = context;
         this.dateInterface = dateInterface;
+
         newDateArray[0] = oldDateArray[0];
         newDateArray[1] = oldDateArray[1];
         newDateArray[2] = oldDateArray[2];
@@ -87,7 +86,7 @@ public class ChooseDateUtil implements View.OnClickListener, NumberPicker.OnValu
         npcelectDay[0]="今天";npcelectDay[1]="明天";npcelectDay[2]="后天";//日数组填充数据
         npDay.setDisplayedValues(npcelectDay);//设置选择器数据、默认值
         npDay.setMinValue(getMinDay());
-        npDay.setMaxValue(npcelectDay.length-1);
+        npDay.setMaxValue(2);
         for (int i = 0; i < npcelectDay.length; i++) {
             if (npcelectDay[i].equals(newDateArray[0])) {
                 npDay.setValue(i);

@@ -2,13 +2,11 @@ package com.example.zhoujunbo.wasterecovery10;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,14 +20,14 @@ import com.example.zhoujunbo.wasterecovery10.util.ChooseCityInterface;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseCityUtil;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseDateInterface;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseDateUtil;
-
-import org.w3c.dom.Text;
+import com.example.zhoujunbo.wasterecovery10.util.ChooseGoodsInterface;
+import com.example.zhoujunbo.wasterecovery10.util.ChooseGoodsUti;
 
 import java.util.Calendar;
 
 public class Order_Fragment extends Fragment {
      private Context mContext;
-     Button submit_order;
+     Button submit_order,click_add;
      TextView book_time,add_city;
      EditText add_name,add_postname,add_num;
 
@@ -49,12 +47,25 @@ public class Order_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.order_fragment, null);
         submit_order = (Button) view.findViewById(R.id.submit_order);
+        click_add=(Button)view.findViewById(R.id.click_add);
         book_time = (TextView) view.findViewById(R.id.book_time);
         add_city=(TextView)view.findViewById(R.id.add_city) ;
         add_name=(EditText)view.findViewById(R.id.add_name);
         add_num=(EditText)view.findViewById(R.id.add_num);
         add_postname=(EditText)view.findViewById(R.id.add_postnum);
 
+        click_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ChooseGoodsUti goodsUtil=new ChooseGoodsUti();
+                goodsUtil.createDialog(getActivity(), new ChooseGoodsInterface() {
+                    @Override
+                    public void sure(String type,String count) {
+
+                    }
+                });
+            }
+        });
         submit_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +102,6 @@ public class Order_Fragment extends Fragment {
                      case 0:Min=0;break;
                      case 1:Min=30;break;
                  }
-
                  Date =year+"年"+month+"月"+day+"日  ";
                 book_time.setText(Date + tsDay(newDateArray[0]) + "     " + newDateArray[1] + "时" + Min + "分");
             }
@@ -100,13 +110,11 @@ public class Order_Fragment extends Fragment {
     public void chooseCityDialog() {
         final ChooseCityUtil cityUtil = new ChooseCityUtil();
         String[] oldCityArray = add_city.getText().toString().split("-");
-
         if(oldCityArray[1].equals("市")){
             oldCityArray[0]="浙江";
             oldCityArray[1]="杭州";
             oldCityArray[2]="西湖";
         }
-
         cityUtil.createDialog(getActivity(), oldCityArray, new ChooseCityInterface() {
             @Override
             public void sure(String[] newCityArray) {

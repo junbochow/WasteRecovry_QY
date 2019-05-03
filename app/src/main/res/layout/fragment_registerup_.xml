@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registerinfo_Fragment">
+    tools:context=".Registerup_Fragment">
 
     <LinearLayout
         android:layout_margin="20dp"
@@ -19,13 +19,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="企  业  名" />
+                android:text="用  户  名" />
             <EditText
-                android:id="@+id/company_name"
+                android:id="@+id/username"
                 android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请填写企业名"
+                android:hint="请填写用户名"
                 android:textSize="11dp"/>
         </LinearLayout>
         <LinearLayout
@@ -35,15 +35,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="征  信  码" />
+                android:text="密         码" />
             <EditText
-                android:id="@+id/company_code"
+                android:id="@+id/password"
                 android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请填写征信码"
+                android:hint="请填写密码"
                 android:textSize="11dp"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,45 +52,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="注册地址" />
+                android:text="确认密码" />
             <EditText
-                android:id="@+id/company_address"
+                android:id="@+id/confirm_password"
                 android:paddingLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="XX省XX市XX区XX路XX号"
+                android:hint="请填写密码"
                 android:textSize="11dp"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="企业类型" />
-            <EditText
-                android:id="@+id/company_type"
-                android:paddingLeft="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="可以不填"
-                android:textSize="11dp"/>
-        </LinearLayout>
-        <TextView
-            android:layout_gravity="center"
-            android:paddingTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="经后台审核通过后，即可预约回收"/>
         <Button
             android:layout_marginTop="30dp"
-            android:id="@+id/finished"
+            android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/shape"
             android:layout_gravity="center"
-            android:text="完成"
+            android:text="下一步"
             />
     </LinearLayout>
 

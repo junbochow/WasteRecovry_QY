@@ -2,14 +2,13 @@ package com.example.zhoujunbo.wasterecovery10;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import java.util.HashMap;
 
 public class NetUilts {
     /*
@@ -57,18 +56,17 @@ public class NetUilts {
         }
         return null;
     }
-    public static String orderPost(String order){
+
+    public static String DoPost(String data) {
         HttpURLConnection conn = null;
         try {
-            URL url = new URL("http://192.168.43.51/system/userBox/s");
+            URL url = new URL("http://192.168.43.51/system/userBox/test");
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");//设置请求方式
             conn.setConnectTimeout(10000);//设置连接超时时间
             conn.setReadTimeout(5000);//设置读取超时时间
             //POST请求的参数
             OutputStream out = conn.getOutputStream();//获得输出流对象，用于向服务器写数据
-            JSONObject jsonObject=new JSONObject();
-            String data = "{\"username=\" + username}";
             out.write(data.getBytes());//向服务器写数据;
             out.close();//关闭输出流
             conn.connect();//开始连接

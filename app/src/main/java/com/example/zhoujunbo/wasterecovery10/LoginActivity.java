@@ -1,21 +1,15 @@
 package com.example.zhoujunbo.wasterecovery10;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.mob.MobSDK;
-
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
+//import cn.cnsmssdk.SMSSDK;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,8 +31,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         register_btn = (Button) findViewById(R.id.register_btn);
         login_btn.setOnClickListener(this);
         register_btn.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -47,16 +39,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String edt_password = password.getText().toString();
         switch (v.getId()) {
             case R.id.login_btn:
-                // 1. 判断手机号是不是11位并且看格式是否合理
-//                if (!judgePhoneNums(edt_account)) {
-//                    return;
-//                }
-                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent_login);
 //                dopost(edt_account,edt_password);
+                SharedPreferences sp = getSharedPreferences("Token", 0);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("token","135");
+                editor.commit();
+                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent_login);
+                this.finish();
                 break;
             case R.id.register_btn:
-
                 Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
         }
@@ -101,17 +93,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onDestroy() {
-        //反注册回调监听接口
-        SMSSDK.unregisterAllEventHandler();
         super.onDestroy();
     }
 
-        private void dopost (final String account,final String password){ //发送后台
+    private void dopost (final String account,final String password){ //发送后台
             new Thread(new Runnable() {
-
                 @Override
                 public void run() {
                     final String state = NetUilts.loginofPost(account,password);
+                    SharedPreferences sp = getSharedPreferences("Token", 0);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("token",state);
                     runOnUiThread(new Runnable() {//执行任务在主线程中
                         @Override
                         public void run() {//就是在主线程中操作

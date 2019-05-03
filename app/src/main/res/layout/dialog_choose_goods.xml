@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="260dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/white_rounded_corners">
@@ -15,53 +15,192 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <NumberPicker
-                android:id="@+id/npProvince"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
-
+            android:orientation="vertical">
             <TextView
+                android:paddingTop="20dp"
+                android:text="回收品种类"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="省"
-                android:textColor="#656565"
-                android:textSize="18sp" />
-
-            <NumberPicker
-                android:id="@+id/npCity"
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@mipmap/line"/>
+            <RelativeLayout
+                android:paddingTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/metal"
+                    android:text="金属类"
+                    android:tag="rd_metal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"
+                    android:layout_margin="5dp" />
+                <CheckBox
+                    android:id="@+id/paper"
+                    android:layout_toRightOf="@+id/metal"
+                    android:text="纸类"
+                    android:layout_margin="5dp"
+                    android:tag="rd_paper"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+                <CheckBox
+                    android:id="@+id/plastic"
+                    android:layout_toRightOf="@id/paper"
+                    android:text="塑料类"
+                    android:layout_margin="5dp"
+                    android:tag="rd_plastic"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+                <CheckBox
+                    android:id="@+id/cloth"
+                    android:layout_toRightOf="@+id/plastic"
+                    android:text="纺织类"
+                    android:layout_margin="5dp"
+                    android:tag="rd_cloth"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+
+            </RelativeLayout>
 
             <TextView
+                android:paddingTop="20dp"
+                android:text="规格数量"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="市"
-                android:textColor="#656565"
-                android:textSize="18sp" />
-
-            <NumberPicker
-                android:id="@+id/npCounty"
-                android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@mipmap/line"/>
 
-            <TextView
+            <RelativeLayout
+                android:paddingTop="10dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text=""
-                android:textColor="#656565"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/kg5"
+                    android:text="5-10kg"
+                    android:layout_margin="5dp"
+                    android:tag="5"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+                <CheckBox
+                    android:id="@+id/kg10"
+                    android:layout_toRightOf="@+id/kg5"
+                    android:text="10-15kg"
+                    android:layout_margin="5dp"
+                    android:tag="10"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+                <CheckBox
+                    android:id="@+id/kg15"
+                    android:layout_toRightOf="@id/kg10"
+                    android:text="15-20kg"
+                    android:layout_margin="5dp"
+                    android:tag="15"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+
+                <CheckBox
+                    android:id="@+id/kg20"
+                    android:layout_toRightOf="@+id/kg15"
+                    android:text="20kg以上"
+                    android:layout_margin="5dp"
+                    android:tag="20"
+                    android:layout_height="wrap_content"
+                    android:layout_width="60dip"
+                    android:paddingTop="4dip"
+                    android:paddingBottom="4dip"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:background="@drawable/button_style"
+                    android:textColor="@drawable/txt_selector"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@mipmap/line"/>
+
+            <RelativeLayout
+                android:paddingTop="3dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:id="@+id/yuji"
+                    android:text="预计价格约为:"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/preview_price"
+                    android:paddingLeft="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="25dp"
+                    android:text="0"
+                    android:textColor="@color/text_yellow"
+                    android:layout_toRightOf="@id/yuji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:paddingLeft="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="元"
+                    android:layout_toRightOf="@id/preview_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
         </LinearLayout>
 
         <View
