@@ -16,6 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
+                android:paddingBottom="5dp"
                 android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -132,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:text="选择省-市-区"
                         android:layout_centerVertical="true"
-                        android:textSize="12dp"/>
+                        android:textSize="11dp"/>
 
                     <ImageView
                         android:layout_width="20dp"
@@ -155,7 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="详细地址"
-                        android:textSize="12dp"/>
+                        android:textSize="11dp"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -214,7 +215,8 @@
                     android:layout_toRightOf="@+id/info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="10dp"/>
+                    android:hint="若超过20kg，请备注规格"
+                    android:textSize="12dp"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -248,7 +250,7 @@
                     android:background="@mipmap/line" />
             </RelativeLayout>
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/order_items"
+                android:id="@+id/recycler_goods"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </android.support.v7.widget.RecyclerView>

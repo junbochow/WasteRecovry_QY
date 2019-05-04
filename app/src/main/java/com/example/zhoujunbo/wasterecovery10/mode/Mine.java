@@ -1,4 +1,4 @@
-package com.example.zhoujunbo.wasterecovery10;
+package com.example.zhoujunbo.wasterecovery10.mode;
 
 public class Mine {
     private String name;
@@ -16,4 +16,5 @@ public class Mine {
     public int getImageId(){
         return imageId;
     }
+
 }

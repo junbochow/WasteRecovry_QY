@@ -1,6 +1,8 @@
 package com.example.zhoujunbo.wasterecovery10;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,62 +13,66 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.Switch;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.example.zhoujunbo.wasterecovery10.Adapter.Adapter;
+import com.example.zhoujunbo.wasterecovery10.mode.Mine;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class Mine_Fragment extends Fragment {
 
     private List<Mine> mine_items=new ArrayList<>();
     private List<Mine> mine_items2=new ArrayList<>();
+    Button btn_quit;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.mine_fragment,container,false);
+        btn_quit=(Button)view.findViewById(R.id.btn_quit);
+        btn_quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //清除用户登录记录
+                SharedPreferences sharedPreferences= getActivity().getSharedPreferences("Token", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         if(mine_items.size()==0) initItems();
         if(mine_items2.size()==0) initItems2();
+
         RecyclerView recyclerView =  (RecyclerView) view.findViewById(R.id.recycler_mine);
-        RecyclerView recyclerView2 =  (RecyclerView) view.findViewById(R.id.recycler_mine2);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
-        recyclerView2.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        LinearLayoutManager layoutManager2=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView2.setLayoutManager(layoutManager2);
         Adapter adapter=new Adapter(mine_items);
-        Adapter adapter2=new Adapter(mine_items2);
         recyclerView.setAdapter(adapter);
+
+        RecyclerView recyclerView2 =  (RecyclerView) view.findViewById(R.id.recycler_mine2);
+        recyclerView2.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        LinearLayoutManager layoutManager2=new LinearLayoutManager(getActivity());
+        recyclerView2.setLayoutManager(layoutManager2);
+        Adapter adapter2=new Adapter(mine_items2);
         recyclerView2.setAdapter(adapter2);
         return view;
 
     }
-
     private void initItems(){
 
-            Mine address=new Mine("个人信息",R.drawable.mine_address);
+            Mine address=new Mine("企业信息",R.drawable.mine_address);
             mine_items.add(address);
-            Mine order=new Mine("历史订单",R.drawable.mine_order);
-            mine_items.add(order);
-            Mine coins=new Mine("收入统计",R.drawable.mine_coins);
-            mine_items.add(coins);
+//            Mine order=new Mine("历史订单",R.drawable.mine_order);
+//            mine_items.add(order);
+//            Mine coins=new Mine("收入统计",R.drawable.mine_coins);
+//            mine_items.add(coins);
 
     }
     private void initItems2(){

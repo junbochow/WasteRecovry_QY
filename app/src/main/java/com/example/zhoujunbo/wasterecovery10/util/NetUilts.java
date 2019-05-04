@@ -1,4 +1,4 @@
-package com.example.zhoujunbo.wasterecovery10;
+package com.example.zhoujunbo.wasterecovery10.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +20,7 @@ public class NetUilts {
         HttpURLConnection conn = null;
         try {
             URL url = new URL("http://192.168.43.51/system/userBox/test");
-
+            //String 转 Json
             JSONObject jsonParam = new JSONObject();
             try {
                 jsonParam.put("username", username);
@@ -28,7 +28,8 @@ public class NetUilts {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            String data=String.valueOf(jsonParam);  //json串转string类型
+            //json串转string类型
+            String data=String.valueOf(jsonParam);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");//设置请求方式
             conn.setConnectTimeout(10000);//设置连接超时时间
@@ -89,7 +90,7 @@ public class NetUilts {
         return null;
     }
 
-        private static String getstateFromInputstream(InputStream is) throws IOException, JSONException {
+    private static String getstateFromInputstream(InputStream is) throws IOException, JSONException {
             ByteArrayOutputStream baos=new ByteArrayOutputStream();//定义一个缓存流
             byte[] buffer=new byte[1024];//定义一个数组，用于读取is
             int len=-1;
@@ -104,5 +105,6 @@ public class NetUilts {
             baos.close();
             return state;
         }
+
 
     }

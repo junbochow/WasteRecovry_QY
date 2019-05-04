@@ -19,7 +19,7 @@ public class ChooseGoodsUti implements View.OnClickListener {
     ChooseGoodsInterface goodsInterface;
     CheckBox metal,paper,plastic,cloth;
     CheckBox kg5,kg10,kg15,kg20;
-    String type="",count="0";
+    String type="",count="0",price="0";
     TextView preview_price,tvCancel,tvSure;
 
     public void createDialog(Context context,ChooseGoodsInterface goodsInterface){
@@ -58,7 +58,6 @@ public class ChooseGoodsUti implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-
             case R.id.metal:
                 paper.setChecked(false);
                 plastic.setChecked(false);
@@ -122,11 +121,30 @@ public class ChooseGoodsUti implements View.OnClickListener {
                 if(count.equals("0") || type.equals("")){
                     Toast.makeText(getContext(),"请选择回收品种类与规格数量",Toast.LENGTH_SHORT).show();break;}
                     dialog.dismiss();
-                    goodsInterface.sure(type,count);
+                    price=setprice(type,count);
+                    toCurrent(type,count);
+                    goodsInterface.sure(type,count,price);
                     type="";count="0";
-                     break;
+                    break;
         }
         preview_price.setText(setprice(type,count));
+    }
+
+    private void toCurrent(String type, String count) {
+        switch (type){
+            case "rd_metal":type="金属类";break;
+            case "rd_paper":type="纸类";break;
+            case "rd_plastic":type="塑料类";break;
+            case "rd_cloth":type="纺织类";break;
+        }
+        switch (count){
+            case "5":count="5-10千克";break;
+            case "10":count="10-15千克";break;
+            case "15":count="15-20千克";break;
+            case "20":count="20千克以上";break;
+        }
+        this.type=type;
+        this.count=count;
     }
 
     private String setprice(String type, String count) {
@@ -136,22 +154,22 @@ public class ChooseGoodsUti implements View.OnClickListener {
        switch (type){
            case "rd_metal":
                show=Integer.parseInt(count);
-               show=8*show;
+               show=4*show;
                price=Integer.toString(show);
                break;
            case "rd_paper":
                show=Integer.parseInt(count);
-               show=3*show;
+               show=2*show;
                price=Integer.toString(show);
                break;
            case "rd_plastic":
                show=Integer.parseInt(count);
-               show=4*show;
+               show=3*show;
                price=Integer.toString(show);
                break;
            case "rd_cloth":
                show=Integer.parseInt(count);
-               show=5*show;
+               show=3*show;
                price=Integer.toString(show);
                break;
        }

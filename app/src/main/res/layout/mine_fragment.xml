@@ -36,6 +36,7 @@
     </android.support.v7.widget.CardView>
 
     <Button
+        android:id="@+id/btn_quit"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_width="300dp"

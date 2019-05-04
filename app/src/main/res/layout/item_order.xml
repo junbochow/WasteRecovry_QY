@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
     android:layout_width="match_parent"
@@ -9,7 +12,6 @@
     android:orientation="vertical"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingBottom="10dp"
     android:paddingTop="10dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/order_num"
+            android:id="@+id/order_ID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
@@ -31,15 +33,22 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <TextView
+                android:text="回收员："
+                android:id="@+id/huishouyuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/order_collector"
+            android:id="@+id/order_collectorname"
+            android:layout_toRightOf="@id/huishouyuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
             <TextView
                 android:text="师傅"
+                android:paddingLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/order_collector"/>
+                android:layout_toRightOf="@id/order_collectorname"/>
             <TextView
                 android:text="联系方式："
                 android:id="@+id/lianxifangshi"
@@ -52,6 +61,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="下单人："
+                android:id="@+id/xiadanren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/order_custmername"
+                android:layout_toRightOf="@id/xiadanren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="联系方式："
+                android:id="@+id/lxfs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/order_custmernum"
+                android:layout_toRightOf="@+id/lxfs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="10dp"
@@ -64,17 +100,23 @@
         </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="right"
     android:orientation="horizontal"
     android:paddingRight="40dp">
+        <Button
+            android:layout_marginRight="10dp"
+            android:text="查看进度"
+            android:id="@+id/seein"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
     <TextView
         android:id="@+id/order_state"
+        android:textColor="#FF0000"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_gravity="right"
-        android:paddingRight="5dp" />
+        android:layout_gravity="center_vertical"/>
 </LinearLayout>
 
 </LinearLayout>

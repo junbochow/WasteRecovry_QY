@@ -10,7 +10,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.zhoujunbo.wasterecovery10.util.NetUilts;
 import static com.example.zhoujunbo.wasterecovery10.R.id.fl_container;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Mine_Fragment mine_fragment;
     private Order_Fragment order_fragment;
     private History_Fragment history_fragment;
+    Thread thread;
     //请求状态码
     private static int REQUEST_PERMISSION_CODE = 1;
 
@@ -28,20 +31,20 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
 
-                case R.id.navigation_mine:{
-                    if(mine_fragment==null)mine_fragment=new Mine_Fragment();
+                case R.id.navigation_mine: {
+                    if (mine_fragment == null) mine_fragment = new Mine_Fragment();
                     getSupportFragmentManager().beginTransaction().
                             replace(fl_container, mine_fragment).commitAllowingStateLoss();
                 }
-                    return true;
-                case R.id.navigation_order:{
-                    if(order_fragment==null)order_fragment=new Order_Fragment();
+                return true;
+                case R.id.navigation_order: {
+                    if (order_fragment == null) order_fragment = new Order_Fragment();
                     getSupportFragmentManager().beginTransaction().
                             replace(fl_container, order_fragment).commitAllowingStateLoss();
                 }
                 return true;
-                case R.id.navigation_history:{
-                    if(history_fragment==null)history_fragment=new History_Fragment();
+                case R.id.navigation_history: {
+                    if (history_fragment == null) history_fragment = new History_Fragment();
                     getSupportFragmentManager().beginTransaction().
                             replace(fl_container, history_fragment).commitAllowingStateLoss();
                 }
@@ -52,30 +55,65 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //实例化
-        order_fragment=new Order_Fragment();
+        order_fragment = new Order_Fragment();
         //把home_fragment 添加到Activity中
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_container,order_fragment).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_container, order_fragment).commitAllowingStateLoss();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         //判断需要申请权限
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_PERMISSION_CODE);
             }
-        }
-        SharedPreferences sharedPreferences= getSharedPreferences("Token", 0);
-        String token=sharedPreferences.getString("token","");
-        if(token.equals("")){
-            Intent intent=new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            //判断是否登录
+//            isLogin(this);
         }
 
     }
+
+
+    private void isLogin(final MainActivity mainActivity) {
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!Thread.interrupted()) { // 非阻塞过程中通过判断中断标志来退出
+                    try {
+                        SharedPreferences sharedPreferences= getSharedPreferences("Token", 0);
+                        String token=sharedPreferences.getString("token","");
+                        final Boolean ing=NetUilts.DoPost(token).equals("ok");
+                            // 进行网络请求
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // 更新UI
+                                if (!ing) {
+                                    Toast.makeText(mainActivity,"登录超时，请重新登录",Toast.LENGTH_SHORT).show();;
+                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    mainActivity.finish();
+                                }
+                            }
+                        });
+                        Thread.sleep(600000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        break; // 阻塞过程捕获中断异常来退出，执行break跳出循环
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //被销毁时终止线程
+//        thread.interrupt();
+    }
 }
+

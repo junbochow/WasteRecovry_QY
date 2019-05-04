@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.zhoujunbo.wasterecovery10.util.NetUilts;
 //import cn.cnsmssdk.SMSSDK;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -54,20 +55,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /**
-     * 判断手机号码是否合理
-     *
-     * @param phoneNums
-     */
-    private boolean judgePhoneNums(String phoneNums) {
-        if (isMatchLength(phoneNums, 11)
-                && isMobileNO(phoneNums)) {
-            return true;
-        }
-        Toast.makeText(this, "手机号码输入有误！",Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
     /* 判断一个字符串的位数*/
     public static boolean isMatchLength(String str, int length) {
         if (str.isEmpty()) {
@@ -75,20 +62,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             return str.length() == length ? true : false;
         }
-    }
-
-    /* 验证手机格式*/
-    public static boolean isMobileNO(String mobileNums) {
-        /*
-         * 移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
-         * 联通：130、131、132、152、155、156、185、186 电信：133、153、180、189、（1349卫通）
-         * 总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
-         */
-        String telRegex = "[1][358]\\d{9}";// "[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-        if (TextUtils.isEmpty(mobileNums))
-            return false;
-        else
-            return mobileNums.matches(telRegex);
     }
 
     @Override
@@ -104,10 +77,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     SharedPreferences sp = getSharedPreferences("Token", 0);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("token",state);
+                    editor.commit();
                     runOnUiThread(new Runnable() {//执行任务在主线程中
                         @Override
                         public void run() {//就是在主线程中操作
-                            Toast.makeText(LoginActivity.this, state, Toast.LENGTH_SHORT).show();
+                            if(!state.equals("")) {
+                                Toast.makeText(LoginActivity.this, state, Toast.LENGTH_SHORT).show();
+                                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent_login);
+                            }
                         }
                     });
                 }
@@ -116,4 +94,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         }
+
     }

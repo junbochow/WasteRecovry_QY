@@ -7,6 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zhoujunbo.wasterecovery10.Adapter.Adapter_Goods;
+import com.example.zhoujunbo.wasterecovery10.mode.Goods;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseCityInterface;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseCityUtil;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseDateInterface;
@@ -23,13 +28,17 @@ import com.example.zhoujunbo.wasterecovery10.util.ChooseDateUtil;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseGoodsInterface;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseGoodsUti;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Order_Fragment extends Fragment {
      private Context mContext;
      Button submit_order,click_add;
      TextView book_time,add_city;
      EditText add_name,add_postname,add_num;
+    private List<Goods> goods_items=new ArrayList<>();
+    RecyclerView recyclerView;
 
      Calendar calendar = Calendar.getInstance();
      int year = calendar.get(Calendar.YEAR);
@@ -53,6 +62,12 @@ public class Order_Fragment extends Fragment {
         add_name=(EditText)view.findViewById(R.id.add_name);
         add_num=(EditText)view.findViewById(R.id.add_num);
         add_postname=(EditText)view.findViewById(R.id.add_postnum);
+        final RecyclerView recyclerView =  (RecyclerView) view.findViewById(R.id.recycler_goods);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        final Adapter_Goods adapter=new Adapter_Goods(goods_items,this.getActivity());
+        recyclerView.setAdapter(adapter);
 
         click_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +75,9 @@ public class Order_Fragment extends Fragment {
                 final ChooseGoodsUti goodsUtil=new ChooseGoodsUti();
                 goodsUtil.createDialog(getActivity(), new ChooseGoodsInterface() {
                     @Override
-                    public void sure(String type,String count) {
-
+                    public void sure(String type,String count,String price) {
+                        Goods data=new Goods(type,count,price);
+                        adapter.add(data);
                     }
                 });
             }
@@ -198,21 +214,3 @@ public class Order_Fragment extends Fragment {
     }
 }
 
-
-//    private void dopostOrder (final String account){ //发送后台
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                final String state = NetUilts.loginofPost(account);
-//                getActivity().runOnUiThread(new Runnable() {//执行任务在主线程中
-//                    @Override
-//                    public void run() {//就是在主线程中操作
-//                        Toast.makeText(getActivity(), state, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
-//
-//        }).start();
-//
-//
-//    }
