@@ -39,7 +39,6 @@ public class Registerup_Fragment extends Fragment {
                 if(isNotBlank()){
                     ((RegisterActivity)getActivity()).setUsername(username.getText().toString());
                     ((RegisterActivity)getActivity()).setPassword(password.getText().toString());
-
                     if(registerinfo_fragment==null)registerinfo_fragment=new Registerinfo_Fragment();
                     getFragmentManager().beginTransaction().addToBackStack(null).
                             replace(register_container, registerinfo_fragment).commitAllowingStateLoss();

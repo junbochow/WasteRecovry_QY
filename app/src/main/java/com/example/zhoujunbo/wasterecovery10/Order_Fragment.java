@@ -72,14 +72,18 @@ public class Order_Fragment extends Fragment {
         click_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ChooseGoodsUti goodsUtil=new ChooseGoodsUti();
+                if (adapter.getItemCount() == 4) {
+                    Toast.makeText(getActivity(), "最多只能添加四个品类", Toast.LENGTH_SHORT).show();
+                } else{
+                final ChooseGoodsUti goodsUtil = new ChooseGoodsUti();
                 goodsUtil.createDialog(getActivity(), new ChooseGoodsInterface() {
                     @Override
-                    public void sure(String type,String count,String price) {
-                        Goods data=new Goods(type,count,price);
+                    public void sure(String type, String count, String price) {
+                        Goods data = new Goods(type, count, price);
                         adapter.add(data);
                     }
                 });
+            }
             }
         });
         submit_order.setOnClickListener(new View.OnClickListener() {

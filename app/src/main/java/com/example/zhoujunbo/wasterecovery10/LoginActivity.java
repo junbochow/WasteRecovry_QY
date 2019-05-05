@@ -40,14 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String edt_password = password.getText().toString();
         switch (v.getId()) {
             case R.id.login_btn:
-//                dopost(edt_account,edt_password);
-                SharedPreferences sp = getSharedPreferences("Token", 0);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString("token","135");
-                editor.commit();
-                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent_login);
-                this.finish();
+                dopost(edt_account,edt_password);
                 break;
             case R.id.register_btn:
                 Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
@@ -67,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        this.finish();
     }
 
     private void dopost (final String account,final String password){ //发送后台
@@ -81,10 +75,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     runOnUiThread(new Runnable() {//执行任务在主线程中
                         @Override
                         public void run() {//就是在主线程中操作
-                            if(!state.equals("")) {
-                                Toast.makeText(LoginActivity.this, state, Toast.LENGTH_SHORT).show();
-                                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            if(!state.equals("error")) {
+                                Intent intent_login=new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent_login);
+                                LoginActivity.this.finish();
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this,"账号、密码错误",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

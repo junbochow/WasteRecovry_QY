@@ -19,7 +19,7 @@ public class NetUilts {
     public static String loginofPost(String username,String password) {
         HttpURLConnection conn = null;
         try {
-            URL url = new URL("http://192.168.43.51/system/userBox/test");
+            URL url = new URL("http://192.168.43.51/system/userBox/login");
             //String 转 Json
             JSONObject jsonParam = new JSONObject();
             try {
@@ -34,6 +34,7 @@ public class NetUilts {
             conn.setRequestMethod("POST");//设置请求方式
             conn.setConnectTimeout(10000);//设置连接超时时间
             conn.setReadTimeout(5000);//设置读取超时时间
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             //POST请求的参数
             OutputStream out = conn.getOutputStream();//获得输出流对象，用于向服务器写数据
             out.write(data.getBytes());//向服务器写数据;
@@ -61,11 +62,12 @@ public class NetUilts {
     public static String DoPost(String data) {
         HttpURLConnection conn = null;
         try {
-            URL url = new URL("http://192.168.43.51/system/userBox/test");
+            URL url = new URL("http://192.168.43.51/system/userBox/login");
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");//设置请求方式
             conn.setConnectTimeout(10000);//设置连接超时时间
             conn.setReadTimeout(5000);//设置读取超时时间
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             //POST请求的参数
             OutputStream out = conn.getOutputStream();//获得输出流对象，用于向服务器写数据
             out.write(data.getBytes());//向服务器写数据;
@@ -98,7 +100,8 @@ public class NetUilts {
                 baos.write(buffer,0,len);
             }
             is.close();//关闭输入流
-            String state =baos.toString();//将缓存流中的数据转换成字符串
+            String state=null;
+            state =baos.toString();//将缓存流中的数据转换成字符串
             JSONObject jsonObject =new JSONObject(state);
             state=jsonObject.get("result").toString();
 //			String state=new String (baos.toByteArray(baos),"GBK");//把流中的数据转换成字符串，采用的是GBk

@@ -26,24 +26,41 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView order_custmernum,order_custmername,order_collectorname,order_collectornum;
-        TextView order_state,order_time,order_ID;
+        TextView order_state,order_time,order_ID,order_whatsmore;
+        TextView goods1,count1,price1,goods2,count2,price2,goods3,count3,price3,goods4,count4,price4;
         Button seein;
         public ViewHolder(@NonNull View view) {
             super(view);
+            order_time=(TextView)view.findViewById(R.id.order_time) ;
+            order_ID=(TextView)view.findViewById(R.id.order_ID) ;
             order_custmername=(TextView)view.findViewById(R.id.order_custmername);
             order_custmernum=(TextView)view.findViewById(R.id.order_custmernum);
             order_collectorname=(TextView)view.findViewById(R.id.order_collectorname);
             order_collectornum=(TextView)view.findViewById(R.id.order_collectornum);
-            order_state=(TextView)view.findViewById(R.id.order_state);
-            order_time=(TextView)view.findViewById(R.id.order_time) ;
-            order_ID=(TextView)view.findViewById(R.id.order_ID) ;
+
+            goods1=(TextView)view.findViewById(R.id.goods1);
+            count1=(TextView)view.findViewById(R.id.count1);
+            price1=(TextView)view.findViewById(R.id.price1);
+
+            goods2=(TextView)view.findViewById(R.id.goods2);
+            count2=(TextView)view.findViewById(R.id.count2);
+            price2=(TextView)view.findViewById(R.id.price2);
+
+            goods3=(TextView)view.findViewById(R.id.goods3);
+            count3=(TextView)view.findViewById(R.id.count3);
+            price3=(TextView)view.findViewById(R.id.price3);
+
+            goods4=(TextView)view.findViewById(R.id.goods4);
+            count4=(TextView)view.findViewById(R.id.count4);
+            price4=(TextView)view.findViewById(R.id.price4);
 
             seein=(Button)view.findViewById(R.id.seein);
+            order_state=(TextView)view.findViewById(R.id.order_state);
+            order_whatsmore=(TextView)view.findViewById(R.id.order_whatsmore);
 
             seein.setOnClickListener(Adapter_History.this);
         }
     }
-
 
     public Adapter_History(List<History> list_items,Context context){
         history_items=list_items;
@@ -68,7 +85,29 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
         holder.order_ID.setText(historyitem.getID());
         holder.order_state.setText(historyitem.getState());
         holder.order_time.setText(historyitem.getTime());
-
+        if(!historyitem.getWhatsmore().equals(null)) {
+            holder.order_whatsmore.setText(historyitem.getWhatsmore());
+        }
+        if(!historyitem.getGoods1().equals(null)) {
+            holder.goods1.setText(historyitem.getGoods1());
+            holder.count1.setText(historyitem.getCount1());
+            holder.price1.setText(historyitem.getPrice1());
+        }
+        if(!historyitem.getGoods2().equals(null)) {
+            holder.goods2.setText(historyitem.getGoods2());
+            holder.count2.setText(historyitem.getCount2());
+            holder.price2.setText(historyitem.getPrice2());
+        }
+        if(!historyitem.getGoods3().equals(null)) {
+            holder.goods3.setText(historyitem.getGoods3());
+            holder.count3.setText(historyitem.getCount3());
+            holder.price3.setText(historyitem.getPrice3());
+        }
+        if(!historyitem.getGoods4().equals(null)) {
+            holder.goods4.setText(historyitem.getGoods4());
+            holder.count4.setText(historyitem.getCount4());
+            holder.price4.setText(historyitem.getPrice4());
+        }
         holder.seein.setTag(position);
 
     }
@@ -90,6 +129,7 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
         }
         this.notifyItemRangeChanged(0, history_items.size());
     }
+
     public void removeData(){
         history_items.removeAll(history_items);
         this.notifyItemRangeChanged(0, history_items.size());

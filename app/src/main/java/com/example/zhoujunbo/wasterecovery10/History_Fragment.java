@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.zhoujunbo.wasterecovery10.Adapter.Adapter_History;
 import com.example.zhoujunbo.wasterecovery10.mode.History;
@@ -37,9 +36,8 @@ public class History_Fragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final Adapter_History adapter = new Adapter_History(history_items, this.getActivity());
+        final Adapter_History adapter = new Adapter_History(history_items,this.getActivity());
         recyclerView.setAdapter(adapter);
-        boolean isLoading;
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -52,7 +50,6 @@ public class History_Fragment extends Fragment {
                         initHisItems();
                         adapter.addData(history_items);
                         mSwipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(getActivity(), "加载完成", Toast.LENGTH_LONG).show();
                     }
                 },1000);
             }
@@ -91,12 +88,16 @@ public class History_Fragment extends Fragment {
     }
 
     private void initHisItems() {
-        History add1 = new History("20152213321093", "取货中", "2019-05-03 12:30", "周波", "15957124172", "陈行", "14958275492");
+        History add1 = new History("20152213321093", "取货中", "2019-05-03 12:30", "周波", "15957124172", "陈行", "14958275492","",
+                "金属类","5-10千克","40元","","","","","","","","","");
         history_items.add(add1);
-        History add2 = new History("20152242321093", "已完成", "2019-05-01 15:30", "均波", "15957124172", "王行", "14958275492");
+        History add2 = new History("20152242321093", "已完成", "2019-05-01 15:30", "均波", "15957124172", "王行", "14958275492","",
+                "金属类","5-10千克","40元","金属类","5-10千克","40元","金属类","5-10千克","40元","","","");
         history_items.add(add2);
-        History add3 = new History("20152424621093", "已完成", "2019-02-03 12:30", "周均波", "15957124172", "王陈行", "14958275492");
+        History add3 = new History("20152424621093", "已完成", "2019-02-03 12:30", "周均波", "15957124172", "王陈行", "14958275492","",
+                "纺织类","5-10千克","40元","纸类","5-10千克","40元","塑料类","5-10千克","40元","金属类","5-10千克","40元");
         history_items.add(add3);
+
     }
 
 }
