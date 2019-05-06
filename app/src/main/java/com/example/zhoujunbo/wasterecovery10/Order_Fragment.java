@@ -2,6 +2,7 @@ package com.example.zhoujunbo.wasterecovery10;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,18 +28,24 @@ import com.example.zhoujunbo.wasterecovery10.util.ChooseDateInterface;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseDateUtil;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseGoodsInterface;
 import com.example.zhoujunbo.wasterecovery10.util.ChooseGoodsUti;
+import com.example.zhoujunbo.wasterecovery10.util.NetUilts;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order_Fragment extends Fragment {
      private Context mContext;
      Button submit_order,click_add;
      TextView book_time,add_city;
-     EditText add_name,add_postname,add_num;
-    private List<Goods> goods_items=new ArrayList<>();
-    RecyclerView recyclerView;
+     EditText add_name,add_postname,add_num,add_whatsmore;
+     private List<Goods> goods_items=new ArrayList<>();
+     RecyclerView recyclerView;
 
      Calendar calendar = Calendar.getInstance();
      int year = calendar.get(Calendar.YEAR);
@@ -62,6 +69,7 @@ public class Order_Fragment extends Fragment {
         add_name=(EditText)view.findViewById(R.id.add_name);
         add_num=(EditText)view.findViewById(R.id.add_num);
         add_postname=(EditText)view.findViewById(R.id.add_postnum);
+        add_whatsmore=(EditText)view.findViewById(R.id.add_whatsmore);
         final RecyclerView recyclerView =  (RecyclerView) view.findViewById(R.id.recycler_goods);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
@@ -100,6 +108,7 @@ public class Order_Fragment extends Fragment {
                 chooseDateDialog();
             }
         });
+
         add_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +132,7 @@ public class Order_Fragment extends Fragment {
                      case 1:Min=30;break;
                  }
                  Date =year+"年"+month+"月"+day+"日  ";
-                book_time.setText(Date + tsDay(newDateArray[0]) + "     " + newDateArray[1] + "时" + Min + "分");
+                book_time.setText(Date + "     " + newDateArray[1] + "时" + Min + "分");
             }
         });
     }
@@ -142,13 +151,7 @@ public class Order_Fragment extends Fragment {
             }
         });
     }
-    private String tsDay(int i) {
-        String day = null;
-        if(i==0){day="今天";}
-        if(i==1){day="明天";}
-        if(i==2){day="后天";}
-        return day;
-    }
+    //判断输入框是否为空
     private boolean isNotBlank() {
         String name = add_name.getText().toString();
         String num = add_num.getText().toString();
@@ -173,7 +176,6 @@ public class Order_Fragment extends Fragment {
             return false;
         }else return true;
     }
-
 
     //判断一个字符串的位数
     public static boolean isMatchLength(String str, int length) {
@@ -204,17 +206,67 @@ public class Order_Fragment extends Fragment {
         alterDiaglog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 Toast.makeText(getActivity(),"取消",Toast.LENGTH_SHORT).show();
             }
         });
         alterDiaglog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                try {
+                    DoComitPost(goods_items);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(getActivity(),"确认",Toast.LENGTH_SHORT).show();
             }
         });
-
         alterDiaglog.show();
     }
+
+    private void DoComitPost(List<Goods> list) throws JSONException {
+
+        List<Goods> goods_items = list;
+        SharedPreferences sp = getActivity().getSharedPreferences("Token", 0);
+        String token=sp.getString("token","");
+
+        //赋值订单内容ordermap
+        final Map<String,String> ordermap = new HashMap<String, String>();
+        for(int i = 0;i<goods_items.size();i++){
+            Goods goods = goods_items.get(i);
+            ordermap.put(goods.getGoods(),goods.getCount()+"-"+goods.getPrice());
+        }
+        //将订单信息、与订单内容写入Json
+        JSONObject data1 = new JSONObject();
+        data1.put("token",token);
+        data1.put("appointmentTime",book_time.getText().toString());
+        data1.put("customerPhone",add_num.getText().toString());
+        data1.put("collectedLocation",add_city.getText().toString()+"-"+add_postname.getText().toString());
+        data1.put("remark",add_whatsmore.getText().toString());
+        data1.put("order",ordermap);
+        //Json转换为String
+        final String order1=String.valueOf(data1);
+        //连接后台
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String state = NetUilts.DoPost(order1,"order","http://192.168.43.51/system/userBox/login");
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (state.equals("ok")) {
+                            Toast.makeText(mContext, "提交成功，正在等待回收员取单", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(mContext,"提交失败",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }
+        }).start();
+
+
+    }
+
 }
 

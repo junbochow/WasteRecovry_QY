@@ -1,5 +1,7 @@
 package com.example.zhoujunbo.wasterecovery10;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +10,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.example.zhoujunbo.wasterecovery10.util.NetUilts;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.example.zhoujunbo.wasterecovery10.R.id.fl_container;
 
@@ -72,36 +79,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private void isLogin() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                SharedPreferences sp = getSharedPreferences("Token", 0);
-//                String token=sp.getString("token","");
-//
-//                JSONObject jsonParam = new JSONObject();
-//                try {
-//                    jsonParam.put("token", token);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                //json串转string类型
-//                String data=String.valueOf(jsonParam);
-//                final String state = NetUilts.DoPost(data);
-//                runOnUiThread(new Runnable() {//执行任务在主线程中
-//                    @Override
-//                    public void run() {//就是在主线程中操作
-//                        if(state.equals("error")) {
-//                            Intent intent_login=new Intent(MainActivity.this, LoginActivity.class);
-//                            startActivity(intent_login);
-//                            MainActivity.this.finish();
-//                        }
-//                    }
-//                });
-//            }
-//
-//        }).start();
-//    }
+    private void isLogin() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences sp = getSharedPreferences("Token", 0);
+                String token=sp.getString("token","");
+
+                JSONObject jsonParam = new JSONObject();
+                try {
+                    jsonParam.put("token", token);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //json串转string类型
+                String data=String.valueOf(jsonParam);
+                final String state = NetUilts.DoPost(data,"login","http://192.168.43.51/system/userBox/login");
+                runOnUiThread(new Runnable() {//执行任务在主线程中
+                    @Override
+                    public void run() {//就是在主线程中操作
+                        if(state.equals("error")) {
+                            Intent intent_login=new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent_login);
+                            MainActivity.this.finish();
+                        }
+                    }
+                });
+            }
+
+        }).start();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

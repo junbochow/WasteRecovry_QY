@@ -15,16 +15,25 @@
     android:paddingTop="10dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <TextView
             android:text="订单编号："
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/order_ID"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            />
+            android:layout_weight="1" />
+            <TextView
+                android:paddingRight="10dp"
+                android:id="@+id/order_state"
+                android:textColor="#FF0000"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right" />
+
         </LinearLayout>
          <TextView
         android:id="@+id/order_time"
@@ -34,27 +43,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="回收员："
-                android:id="@+id/huishouyuan"
+                android:text="公司名："
+                android:id="@+id/gongsiming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/order_collectorname"
-            android:layout_toRightOf="@id/huishouyuan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/order_companyname"
+                android:layout_toRightOf="@id/gongsiming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            <TextView
-                android:text="联系方式："
-                android:id="@+id/lianxifangshi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"/>
-            <TextView
-                android:id="@+id/order_collectornum"
-                android:layout_toRightOf="@+id/lianxifangshi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,6 +81,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="回收员："
+                android:id="@+id/huishouyuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/order_collectorname"
+                android:layout_toRightOf="@id/huishouyuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="联系方式："
+                android:id="@+id/lianxifangshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/order_collectornum"
+                android:layout_toRightOf="@+id/lianxifangshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="取货地址："
+                android:id="@+id/dizhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/order_address"
+                android:layout_toRightOf="@id/dizhi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
 
         <ImageView
             android:layout_width="match_parent"
@@ -199,12 +240,6 @@
             android:id="@+id/seein"
             android:layout_width="wrap_content"
             android:layout_height="40dp"/>
-    <TextView
-        android:id="@+id/order_state"
-        android:textColor="#FF0000"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"/>
 </LinearLayout>
 
 </LinearLayout>
