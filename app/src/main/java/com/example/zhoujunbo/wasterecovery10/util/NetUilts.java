@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 
 public class NetUilts {
     /*
@@ -63,12 +64,28 @@ public class NetUilts {
             is.close();//关闭输入流
             String state=null;
             state =baos.toString();//将缓存流中的数据转换成字符串
+
             JSONObject jsonObject =new JSONObject(state);
+
             if(type.equals("login")) {
                 state = jsonObject.get("result").toString();
             }
             else if(type.equals("order")){
                 state=jsonObject.get("result").toString();
+            }else if(type.equals("history")){
+                if(state==null){
+                    return "error";
+                }
+                //通过迭代器获得json当中所有的key值
+                Iterator keys = jsonObject.keys();
+                //然后通过循环遍历出的key值
+                while (keys.hasNext()){
+                    String key = String.valueOf(keys.next());
+                    //通过通过刚刚得到的key值去解析后面的json
+                    String jsonString=jsonObject.get(key).toString();
+                    state = state+"-";
+                }
+
             }
 //			String state=new String (baos.toByteArray(baos),"GBK");//把流中的数据转换成字符串，采用的是GBk
             baos.close();

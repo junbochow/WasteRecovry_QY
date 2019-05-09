@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@mipmap/line"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预计总价为："/>
+        <TextView
+            android:id="@+id/Total"
+            android:textSize="25dp"
+            android:textColor="@color/text_yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="元"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+            android:text="备注信息："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/order_whatsmore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"/>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:orientation="horizontal"
+    android:paddingRight="10dp">
+        <Button
+            android:layout_marginRight="10dp"
+            android:text="查看进度"
+            android:id="@+id/seein"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+        <Button
+            android:layout_marginRight="10dp"
+            android:text="取消订单"
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+</LinearLayout>
+
+</LinearLayout>

@@ -38,21 +38,6 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
             order_collectorname=(TextView)view.findViewById(R.id.order_collectorname);
             order_collectornum=(TextView)view.findViewById(R.id.order_collectornum);
 
-            goods1=(TextView)view.findViewById(R.id.goods1);
-            count1=(TextView)view.findViewById(R.id.count1);
-            price1=(TextView)view.findViewById(R.id.price1);
-
-            goods2=(TextView)view.findViewById(R.id.goods2);
-            count2=(TextView)view.findViewById(R.id.count2);
-            price2=(TextView)view.findViewById(R.id.price2);
-
-            goods3=(TextView)view.findViewById(R.id.goods3);
-            count3=(TextView)view.findViewById(R.id.count3);
-            price3=(TextView)view.findViewById(R.id.price3);
-
-            goods4=(TextView)view.findViewById(R.id.goods4);
-            count4=(TextView)view.findViewById(R.id.count4);
-            price4=(TextView)view.findViewById(R.id.price4);
 
             seein=(Button)view.findViewById(R.id.seein);
             order_state=(TextView)view.findViewById(R.id.order_state);
@@ -70,7 +55,7 @@ public class Adapter_History extends RecyclerView.Adapter<Adapter_History.ViewHo
     @NonNull
     @Override
     public Adapter_History.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_head,parent,false);
         Adapter_History.ViewHolder holder =new Adapter_History.ViewHolder(view);
         return holder;
     }

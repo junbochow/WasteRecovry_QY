@@ -1,5 +1,6 @@
 package com.example.zhoujunbo.wasterecovery10;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zhoujunbo.wasterecovery10.Adapter.Adapter_History;
+import com.example.zhoujunbo.wasterecovery10.Adapter.Adapter_Order;
 import com.example.zhoujunbo.wasterecovery10.mode.History;
+import com.example.zhoujunbo.wasterecovery10.mode.Order_Body;
+import com.example.zhoujunbo.wasterecovery10.mode.Order_Summary;
+import com.example.zhoujunbo.wasterecovery10.util.NetUilts;
+import com.example.zhoujunbo.wasterecovery10.util.OrderDataHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,6 +31,8 @@ public class History_Fragment extends Fragment {
     private List<History> history_items = new ArrayList<>();
     SwipeRefreshLayout mSwipeRefreshLayout;
     RecyclerView recyclerView;
+    Adapter_Order adapter;
+    private List<Object> mAllOrderList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -36,8 +43,10 @@ public class History_Fragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        final Adapter_History adapter = new Adapter_History(history_items,this.getActivity());
+        initHisItems();
+        adapter= new Adapter_Order(getActivity(),mAllOrderList);
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -47,9 +56,9 @@ public class History_Fragment extends Fragment {
                     @Override
                     public void run() {
                         adapter.removeData();
+//                        DoHistoryPost();
                         initHisItems();
-                        adapter.addData(history_items);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        adapter.notifyDataSetChanged();
                     }
                 },1000);
             }
@@ -59,21 +68,24 @@ public class History_Fragment extends Fragment {
     }
 
 
-    private void doPostHis(final String token) {
-        final String id = token;
+
+    private void DoHistoryPost() {
+        SharedPreferences sp = getActivity().getSharedPreferences("Token", 0);
+        final String token=sp.getString("token","");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //String 转 Json
                 JSONObject jsonParam = new JSONObject();
                 try {
-                    jsonParam.put("token", id);
+                    jsonParam.put("token", token);
                     jsonParam.put("command", 1);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 //json串转string类型
                 String data = String.valueOf(jsonParam);
+                NetUilts.DoPost(data,"history","");
                 getActivity().runOnUiThread(new Runnable() {  //执行任务在主线程中
                     @Override
                     public void run() {//就是在主线程中操作
@@ -88,16 +100,38 @@ public class History_Fragment extends Fragment {
     }
 
     private void initHisItems() {
-        History add1 = new History("20152213321093", "取货中", "2019-05-03 12:30", "周波", "15957124172", "陈行", "14958275492","",
-                "金属类","5-10千克","40元","","","","","","","","","");
-        history_items.add(add1);
-        History add2 = new History("20152242321093", "已完成", "2019-05-01 15:30", "均波", "15957124172", "王行", "14958275492","",
-                "金属类","5-10千克","40元","金属类","5-10千克","40元","金属类","5-10千克","40元","","","");
-        history_items.add(add2);
-        History add3 = new History("20152424621093", "已完成", "2019-02-03 12:30", "周均波", "15957124172", "王陈行", "14958275492","",
-                "纺织类","5-10千克","40元","纸类","5-10千克","40元","塑料类","5-10千克","40元","金属类","5-10千克","40元");
-        history_items.add(add3);
+        Order_Summary order_summary1=new Order_Summary();
+        Order_Body order_body1=new Order_Body();
+        Order_Body order_body2=new Order_Body();
+        Order_Body order_body3=new Order_Body();
+        order_summary1.setID("213213123124");
+        order_summary1.setCollectorName("张三");
+        order_summary1.setCollectorNum("15823124932");
+        order_summary1.setCustmerName("周俊博");
+        order_summary1.setCustmerNum("15957124170");
+        order_summary1.setState("0");
+        order_summary1.setTime("2019年8月7日 16：30");
+        order_summary1.setTotal("230");
+        order_summary1.setWhatsmore("无");
+        order_body1.setGoods("金属类");
+        order_body1.setCount("3kg");
+        order_body1.setPrice("10元");
+        order_body2.setGoods("塑料类");
+        order_body2.setCount("6kg");
+        order_body2.setPrice("20元");
+        order_body3.setGoods("纸类");
+        order_body3.setCount("5kg");
+        order_body3.setPrice("12元");
+        List<Order_Body> order_bodyList=new ArrayList<>();
+        order_bodyList.add(order_body1);
+        order_bodyList.add(order_body2);
+        order_bodyList.add(order_body3);
 
+        order_summary1.setOrder_bodies(order_bodyList);
+        List<Order_Summary> order_summaryList=new ArrayList<>();
+        order_summaryList.add(order_summary1);
+
+        mAllOrderList.addAll(OrderDataHelper.getDataAfterHandle(order_summaryList));
     }
 
 }

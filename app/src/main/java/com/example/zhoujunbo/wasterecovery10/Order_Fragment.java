@@ -70,7 +70,7 @@ public class Order_Fragment extends Fragment {
         add_num=(EditText)view.findViewById(R.id.add_num);
         add_postname=(EditText)view.findViewById(R.id.add_postnum);
         add_whatsmore=(EditText)view.findViewById(R.id.add_whatsmore);
-        final RecyclerView recyclerView =  (RecyclerView) view.findViewById(R.id.recycler_goods);
+        recyclerView =  (RecyclerView) view.findViewById(R.id.recycler_goods);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -250,7 +250,7 @@ public class Order_Fragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final String state = NetUilts.DoPost(order1,"order","http://192.168.43.51/system/userBox/login");
+                final String state = NetUilts.DoPost(order1,"order","http://192.168.43.51/system/trackinginfo/requestOrder");
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -261,7 +261,6 @@ public class Order_Fragment extends Fragment {
                         }
                     }
                 });
-
             }
         }).start();
 

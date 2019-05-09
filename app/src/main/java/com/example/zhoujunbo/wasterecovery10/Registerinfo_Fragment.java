@@ -17,7 +17,7 @@ public class Registerinfo_Fragment extends Fragment {
     private Context mcontext;
     String com_name, com_code, com_address,com_type,Username,Password;
     Button finished;
-    EditText company_name, company_code, company_address, company_type;
+    EditText company_name, company_code, company_address, company_type,company_legalperson,company_num,company_post;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
