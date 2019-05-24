@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //json串转string类型
                 String data=String.valueOf(jsonParam);
-                final String state = NetUilts.DoPost(data,"login","http://192.168.43.51/system/userBox/login");
+                final String state = NetUilts.DoPost(data,"login","http://192.168.43.51/system/mobileUser/login");
                 runOnUiThread(new Runnable() {//执行任务在主线程中
                     @Override
                     public void run() {//就是在主线程中操作

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity   {
-    String Username,Password;
+    String Username,Password,PhoneNum;
     private Registerup_Fragment registerup_fragment;
 
     @Override
@@ -26,11 +26,13 @@ public class RegisterActivity extends AppCompatActivity   {
     public String getPassword() {
         return Password;
     }
+    public String getPhoneNum(){return PhoneNum;}
     public void setUsername(String Username) {
         this.Username = Username;
     }
     public void setPassword(String Password) {
         this.Password = Password;
     }
+    public void setPhoneNum(String PhoneNum){this.PhoneNum=PhoneNum;}
 
 }

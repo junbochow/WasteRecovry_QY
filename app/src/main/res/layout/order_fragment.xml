@@ -50,20 +50,20 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="功能1"/>
+                        android:text="费率表"/>
                     <TextView
                         android:layout_centerInParent="true"
-                        android:layout_width="48dp"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="功能2"/>
+                        android:text="操作指南"/>
                     <TextView
                         android:layout_marginRight="40dp"
                         android:layout_alignParentRight="true"
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="功能3"/>
+                        android:text="政策栏"/>
 
                 </RelativeLayout>
 
@@ -209,14 +209,14 @@
                     android:id="@+id/info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="备注信息" />
+                    android:text="货品信息" />
                 <EditText
                     android:id="@+id/add_whatsmore"
                     android:paddingLeft="20dp"
                     android:layout_toRightOf="@+id/info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="若超过20kg，请备注规格"
+                    android:hint="请填写货物品类、重量"
                     android:textSize="12dp"/>
             </LinearLayout>
 

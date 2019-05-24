@@ -74,12 +74,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         jsonParam.put("username", account);
                         jsonParam.put("password", password);
+                        jsonParam.put("optionCode","1");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     //json串转string类型
                     String data=String.valueOf(jsonParam);
-                    final String state = NetUilts.DoPost(data,"login","http://192.168.43.51/system/userBox/login");
+                    final String state = NetUilts.DoPost(data,"login","http://192.168.43.51/system/mobileUser/login");
                     SharedPreferences sp = getSharedPreferences("Token", 0);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("token",state);

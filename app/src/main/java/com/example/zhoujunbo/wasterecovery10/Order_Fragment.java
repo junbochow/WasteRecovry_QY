@@ -218,7 +218,6 @@ public class Order_Fragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(getActivity(),"确认",Toast.LENGTH_SHORT).show();
             }
         });
         alterDiaglog.show();
@@ -250,11 +249,11 @@ public class Order_Fragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final String state = NetUilts.DoPost(order1,"order","http://192.168.43.51/system/trackinginfo/requestOrder");
+                final String state = NetUilts.DoPost(order1,"order","http://192.168.43.193/system/trackinginfo/requestOrder");
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (state.equals("ok")) {
+                        if (state.equals("1")) {
                             Toast.makeText(mContext, "提交成功，正在等待回收员取单", Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(mContext,"提交失败",Toast.LENGTH_SHORT).show();

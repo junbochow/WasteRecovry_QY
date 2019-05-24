@@ -71,7 +71,7 @@ public class NetUilts {
                 state = jsonObject.get("result").toString();
             }
             else if(type.equals("order")){
-                state=jsonObject.get("result").toString();
+                state=jsonObject.get("code").toString();
             }else if(type.equals("history")){
                 if(state==null){
                     return "error";
@@ -86,6 +86,8 @@ public class NetUilts {
                     state = state+"-";
                 }
 
+            }else if(type.equals("register")){
+                state=jsonObject.get("result").toString();
             }
 //			String state=new String (baos.toByteArray(baos),"GBK");//把流中的数据转换成字符串，采用的是GBk
             baos.close();

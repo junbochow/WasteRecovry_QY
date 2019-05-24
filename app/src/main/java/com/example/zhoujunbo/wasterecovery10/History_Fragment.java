@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.zhoujunbo.wasterecovery10.Adapter.Adapter_Order;
-import com.example.zhoujunbo.wasterecovery10.mode.History;
 import com.example.zhoujunbo.wasterecovery10.mode.Order_Body;
 import com.example.zhoujunbo.wasterecovery10.mode.Order_Summary;
 import com.example.zhoujunbo.wasterecovery10.util.NetUilts;
@@ -28,7 +27,6 @@ import java.util.List;
 
 public class History_Fragment extends Fragment {
 
-    private List<History> history_items = new ArrayList<>();
     SwipeRefreshLayout mSwipeRefreshLayout;
     RecyclerView recyclerView;
     Adapter_Order adapter;
@@ -43,7 +41,9 @@ public class History_Fragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        initHisItems();
+        if(mAllOrderList==null) {
+            initHisItems();
+        }
         adapter= new Adapter_Order(getActivity(),mAllOrderList);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -60,7 +60,7 @@ public class History_Fragment extends Fragment {
                         initHisItems();
                         adapter.notifyDataSetChanged();
                     }
-                },1000);
+                },100);
             }
         });
 
@@ -107,21 +107,21 @@ public class History_Fragment extends Fragment {
         order_summary1.setID("213213123124");
         order_summary1.setCollectorName("张三");
         order_summary1.setCollectorNum("15823124932");
-        order_summary1.setCustmerName("周俊博");
+        order_summary1.setCustmerName("周博");
         order_summary1.setCustmerNum("15957124170");
         order_summary1.setState("0");
-        order_summary1.setTime("2019年8月7日 16：30");
-        order_summary1.setTotal("230");
+        order_summary1.setTime("2019年5月7日 16：30");
+        order_summary1.setTotal("42");
         order_summary1.setWhatsmore("无");
         order_body1.setGoods("金属类");
-        order_body1.setCount("3kg");
-        order_body1.setPrice("10元");
+        order_body1.setCount("3");
+        order_body1.setPrice("10");
         order_body2.setGoods("塑料类");
-        order_body2.setCount("6kg");
-        order_body2.setPrice("20元");
+        order_body2.setCount("6");
+        order_body2.setPrice("20");
         order_body3.setGoods("纸类");
-        order_body3.setCount("5kg");
-        order_body3.setPrice("12元");
+        order_body3.setCount("5");
+        order_body3.setPrice("12");
         List<Order_Body> order_bodyList=new ArrayList<>();
         order_bodyList.add(order_body1);
         order_bodyList.add(order_body2);

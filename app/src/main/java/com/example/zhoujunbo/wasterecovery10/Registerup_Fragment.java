@@ -17,7 +17,7 @@ import static com.example.zhoujunbo.wasterecovery10.R.id.register_container;
 public class Registerup_Fragment extends Fragment {
     Button next;
     Context mcontext;
-    EditText username,password,confirm_password;
+    EditText username,password,confirm_password,phoneNumber;
     private Registerinfo_Fragment registerinfo_fragment;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,14 +31,22 @@ public class Registerup_Fragment extends Fragment {
         next=(Button)view.findViewById(R.id.next);
         username=(EditText)view.findViewById(R.id.username);
         password=(EditText)view.findViewById(R.id.password);
+        phoneNumber=(EditText)view.findViewById(R.id.phoneNumber);
         confirm_password=(EditText)view.findViewById(R.id.confirm_password);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isNotBlank()){
+//                    SharedPreferences sp = getActivity().getSharedPreferences("Token", 0);
+//                    SharedPreferences.Editor editor = sp.edit();
+//                    editor.putString("username",username.getText().toString());
+//                    editor.putString("password",password.getText().toString());
+//                    editor.putString("phonenum",phoneNumber.getText().toString());
+//                    editor.commit();
                     ((RegisterActivity)getActivity()).setUsername(username.getText().toString());
                     ((RegisterActivity)getActivity()).setPassword(password.getText().toString());
+                    ((RegisterActivity)getActivity()).setPassword(phoneNumber.getText().toString());
                     if(registerinfo_fragment==null)registerinfo_fragment=new Registerinfo_Fragment();
                     getFragmentManager().beginTransaction().addToBackStack(null).
                             replace(register_container, registerinfo_fragment).commitAllowingStateLoss();
